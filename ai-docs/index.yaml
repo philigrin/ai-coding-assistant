@@ -1,0 +1,101 @@
+---
+version: 1.0
+last_updated: 2024-03-21
+
+# Project Structure and Hierarchy
+project:
+  name: ProjectName  # Project Name
+  description: ProjectDescription  # Project Description
+  root_dir: /dev
+
+# Document Links and Relationships
+documents:
+  goals:
+    path: goals.md
+    type: root
+    related_to: [users.md, tech-spec.yaml]
+  
+  users:
+    path: users.md
+    type: root
+    related_to: [goals.md, activities/*.md]
+  
+  tech_spec:
+    path: tech-spec.yaml
+    type: root
+    related_to: [goals.md, components/*.md]
+
+# Activity Hierarchy
+activities:
+  - id: activity-xxx
+    path: activities/activity-xxx.md
+    steps:
+      - id: step-xxx
+        path: steps/step-xxx.md
+        stories:
+          - id: story-xxx
+            path: stories/story-xxx.md
+            features:
+              - id: feature-xxx
+                path: features/feature-xxx.md
+                tasks:
+                  - id: task-xxx
+                    path: tasks/task-xxx.md
+                    components:
+                      - id: component-xxx
+                        path: components/component-xxx.md
+
+# Execution Order
+execution_order:
+  - goals.md
+  - users.md
+  - tech-spec.yaml
+  - activities/*.md
+  - steps/*.md
+  - stories/*.md
+  - features/*.md
+  - tasks/*.md
+  - components/*.md
+
+# Component Dependencies
+component_dependencies:
+  - source: component-xxx
+    depends_on: [component-yyy, component-zzz]
+    used_by: [feature-xxx, task-xxx]
+
+# Feature Dependencies
+feature_dependencies:
+  - source: feature-xxx
+    depends_on: [feature-yyy]
+    implements: [story-xxx]
+
+# Task Dependencies
+task_dependencies:
+  - source: task-xxx
+    depends_on: [task-yyy]
+    implements: [feature-xxx]
+
+# Status Tracking
+status:
+  activities:
+    draft: []
+    planned: []
+    in_progress: []
+    done: []
+  
+  features:
+    draft: []
+    planned: []
+    in_progress: []
+    done: []
+  
+  tasks:
+    draft: []
+    planned: []
+    in_progress: []
+    done: []
+  
+  components:
+    draft: []
+    implemented: []
+    deprecated: [] 

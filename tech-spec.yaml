@@ -1,0 +1,36 @@
+project:
+  name: # e.g., "my_cool_app"
+  type: # "mobile" or "web"
+  platform: # e.g., "flutter"
+  architecture: # e.g., "clean_architecture"
+
+stack:
+  frontend: # e.g., "flutter"
+  state_management: # e.g., "riverpod"
+  data_storage: # e.g., "supabase"
+  backend: # e.g., "supabase"
+  auth: # e.g., "supabase_auth"
+  local_storage: # e.g., "hive"
+  analytics: # e.g., "firebase"
+  CI_CD: # e.g., "github_actions"
+
+design:
+  system: # e.g., "material_3"
+  components_library: # e.g., "flutter_ui_kit"
+
+conventions:
+  file_naming: # e.g., "snake_case"
+  widget_type: # e.g., "prefer_stateless"
+  folder_structure: # e.g., "feature_based"
+
+dependencies:
+  packages:
+    - # e.g., "flutter_riverpod"
+    - # e.g., "freezed"
+    - # e.g., "json_serializable"
+    - # e.g., "hive"
+    - # e.g., "supabase_flutter"
+
+env:
+  flutter_version: # e.g., "3.22.0"
+  dart_version: # e.g., "3.2.0"
