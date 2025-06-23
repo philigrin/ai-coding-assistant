@@ -67,7 +67,7 @@ The workflow focuses on creating clear, actionable documentation to guide the AI
 **User Story Mapping Prompt Template**:
 
 ```
-You are an AI Coding Assistant tasked with generating Activities, Steps, and User Stories for an AI-oriented project management and coding environment. Using `goals.md` and `users.md`, create a user story map following User Story Mapping principles. Follow the project structure in `README.md` and templates in `activity-xxx.md`, `step-xxx.md`, and `story-xxx.md`. Ensure YAML frontmatter includes `id`, `status`, and relevant links.
+You are an AI Coding Assistant tasked with generating User Activities, User Steps, and User Stories for an AI-oriented project management and coding environment. Using `goals.md` and `users.md`, create a user story map following User Story Mapping principles. Follow the project structure in `README.md` and templates in `activity-xxx.md`, `step-xxx.md`, and `story-xxx.md`. Ensure YAML frontmatter includes `id`, `status`, and relevant links.
 
 **Input Files**:
 - `goals.md`: Primary goal, success metrics, target audience.
@@ -75,10 +75,10 @@ You are an AI Coding Assistant tasked with generating Activities, Steps, and Use
 - `tech-spec.yaml`: Tech stack and constraints.
 
 **Instructions**:
-1. Generate a full list of Activities (`activities/*.md`):
+1. Generate a full list of User Activities (`activities/*.md`):
    - Represent high-level user journeys tied to goals and personas.
    - Include purpose, description, and YAML frontmatter (`id: activity-<unique-id>`, `status: draft`, `related_goals: [goals.md]`).
-2. Generate Steps per Activity (`steps/*.md`):
+2. Generate Steps per User Activity (`steps/*.md`):
    - Break down each activity into specific actions.
    - Include YAML frontmatter (`id: step-<unique-id>`, `status: draft`, `activity: activity-<id>`).
 3. Generate User Stories per Step (`stories/*.md`):
@@ -143,7 +143,7 @@ You are an AI Coding Assistant tasked with performing Feature Mapping to refine 
    - Include YAML frontmatter (`id: feature-<unique-id>`, `status: draft`, `priority: medium`, `related_stories: [story-<id>]`, `tech_context: ../tech-spec.yaml`).
    - Structure: Purpose, Description, Input Data, Output Data, Acceptance Criteria (with example table), Dependencies.
 4. Generate Question Tasks (`tasks/task-<unique-id>.md`):
-   - For each question, create a task with YAML frontmatter (`id: task-<unique-id>`, `status: draft`, `type: manual-task`).
+   - For each question, create a task with YAML frontmatter (`id: task-<unique-id>`, `status: draft`, `type: question`).
 5. Update `index.yaml`:
    - Add feature and tasks to `activities` and `feature_dependencies`.
    - Update `execution_order` and `status`.
@@ -165,32 +165,20 @@ You are an AI Coding Assistant tasked with performing Feature Mapping to refine 
 - Criteria: Expense saved, error for invalid amounts.
 - Constraints: Positive amounts, authorized users.
 ```
-
-#### Step 4: Decompose Features into Tasks and Components
-
-- **Goal**: Create a granular list of tasks and components for the AI to implement sequentially, with clear metadata for execution.
-- **Process**:
-  - **Open Feature File**: Review `features/feature-<id>.md` for purpose, inputs/outputs, and acceptance criteria.
-  - **Create Tasks**:
-    - For each feature, manually or via AI, create `tasks/task-<unique-id>.md` files for individual units of work (e.g., "Implement expense input form").
-    - Include YAML frontmatter: `id`, `status: draft`, `feature: feature-<id>`, `type: ai-task`, `output` (e.g., `StatelessWidget`), `tech_context: ../tech-spec.yaml`.
-    - List completion criteria based on feature acceptance criteria.
-    - Specify constraints (e.g., "Use Dart, mobile-first").
-  - **Create Components**:
-    - Identify reusable elements (e.g., UI widget, data model) from feature requirements.
-    - Create `components/component-<unique-id>.md` files with YAML frontmatter: `id`, `status: draft`, `type` (e.g., `UI`), `language` (e.g., `dart`), `used_in: [feature-<id>, task-<id>]`.
-    - Define inputs, outputs, and dependencies.
-  - **Update** `index.yaml`:
-    - Add tasks and components to `activities`, `task_dependencies`, and `component_dependencies`.
-    - Update `execution_order` to prioritize tasks (e.g., UI before logic).
-- **AI Prompt for Task/Component Creation**:
+#### Step 4: Define Architecture
+- **Goal**: Create an architecture.md file detailing the project’s full architecture, including file structure, component roles, state management, and service connections.
+**Process:**
+- Use the AI with the prompt below, filling in your project details (e.g., "mobile app for task management").
+- The AI will generate architecture.md based on goals.md, users.md, tech-spec.yaml, and features/*.md.
+- **Prompt:**
 
   ```
-  Based on `features/feature-<id>.md` and `tech-spec.yaml`, generate:
-  - Tasks in `tasks/task-<unique-id>.md` to implement the feature.
-  - Components in `components/component-<unique-id>.md` for reusable elements.
-  - Updated `index.yaml` snippet with tasks, components, and dependencies.
-  Ensure YAML frontmatter includes `id`, `status: draft`, and links. Wrap each file in `<xaiArtifact>` with unique `artifact_id`, `title`, and `contentType="text/markdown"`.
+  I'm building a [mobile app / web service] for [description of your product - the more detailed the better]. Use [Language or framework] for frontend, [Supabase | Firebase] for DB + auth.
+  Give me an architecture.md file with the full architecture:
+  - File + folder structure
+  - What each part does
+  - Where state lives, how services connect
+  Additional context: Project goals are in goals.md, user personas and scenarios are in users.md, tech stack is in tech-spec.yaml, and features are in features/*.md. Output in markdown format with clear sections.
   ```
 
 #### Step 5: Implement Tasks and Components with AI

@@ -3,7 +3,7 @@ id: user-story-unique-id
 title: Название сценария
 status: ready  # draft | ready | deprecated
 actor: User Personas from users.md
-goal: Briefly the goal of the user from goals.md
+step: relatedStepId
 tech_context: ../.tech_context.yaml
 ---
 

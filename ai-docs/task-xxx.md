@@ -3,7 +3,7 @@ id: task-xxx
 title: Task Name
 status: draft  # draft | planned | in-progress | done
 feature: feature-xxx
-type: ai-task # ai-task | manual-task
+type: question # question | implementation
 output: OutputName  # StatelessWidget | Class | Function | API endpoint
 tech_context: ../tech-spec.yaml
 ---
